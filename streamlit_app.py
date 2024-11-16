@@ -1,19 +1,23 @@
 import streamlit as st
 import pandas as pd
-import kagglehub
+import dataframes
 
-# Download latest version
-path = kagglehub.dataset_download("rohanrao/formula-1-world-championship-1950-2020")
-
-print("Path to dataset files:", path)
-
-df_drivers = pd.read_csv(path + "/drivers.csv")
-df_drivers['full_name'] = df_drivers['forename'] + " " + df_drivers['surname']
-print(df_drivers['full_name'])
+def driver_standing_over_time(driver):
+    drivers_df = dataframes.drivers_df()
+    driver_id = (drivers_df)[drivers_df['Full Name'] == driver]['driverId'].iloc[0]
+    print(driver_id)
+    driver_standing_frame = dataframes.driver_standings_df
+    driver_specific_standings = driver_standing_frame[driver_standing_frame['driverId'] == driver_id]
+    return driver_specific_standings
 
 st.title("F1 Growth Thing Name")
-st.selectbox("Drivers",
-             options=([name for name in df_drivers['full_name']]))
-st.write(
-    ""
-)
+st.write("## Driver Stats")
+driver = st.selectbox("Driver",
+             options=([name for name in (dataframes.drivers_df())['Full Name']]))
+standings = driver_standing_over_time(driver)
+st.dataframe(standings)
+st.write("## Constructor Stats")
+st.selectbox("Constructor",
+             options=())
+st.write("## Head to Head")
+
