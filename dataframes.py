@@ -12,4 +12,11 @@ def drivers_df():
     dataframe['Full Name'] = dataframe['forename'] + " " + dataframe['surname']
     return dataframe
 
-races_df =  pd.read_csv(path + "/races.csv")
+def races_df(ascending=True):
+    dataframe =  pd.read_csv(path + "/races.csv")
+    dataframe['Race Identifier'] = dataframe['year'].astype('str') + " " + dataframe['name']
+    dataframe = dataframe.sort_values(by='year', ascending=ascending)
+    return dataframe
+
+    
+pit_stop_df = pd.read_csv(path + "/pit_stops.csv")

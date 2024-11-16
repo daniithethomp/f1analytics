@@ -1,6 +1,7 @@
 import streamlit as st
 import pandas as pd
 import dataframes
+import jess_functions
 
 def driver_standing_over_time(driver):
     drivers_df = dataframes.drivers_df()
@@ -21,3 +22,10 @@ st.selectbox("Constructor",
              options=())
 st.write("## Head to Head")
 
+st.write("## All Races")
+sort_order = st.radio("",("Ascending", "Descending"))
+ascending = True if sort_order == "Ascending" else False
+race = st.selectbox("Race", 
+                options=([race for race in (dataframes.races_df(ascending=ascending))['Race Identifier']]))
+best_pit_stop = jess_functions.best_pit_stop_per_race(race)
+st.dataframe(best_pit_stop)
