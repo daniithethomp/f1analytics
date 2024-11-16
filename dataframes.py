@@ -18,5 +18,8 @@ def races_df(ascending=True):
     dataframe = dataframe.sort_values(by='year', ascending=ascending)
     return dataframe
 
-    
 pit_stop_df = pd.read_csv(path + "/pit_stops.csv")
+
+constructor_standings_df = pd.read_csv(path + "/constructor_standings.csv")
+constructors_df = pd.read_csv(path + "/constructors.csv")
+
