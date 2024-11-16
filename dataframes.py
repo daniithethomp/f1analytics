@@ -19,4 +19,8 @@ def races_df():
 
 constructor_standings_df = pd.read_csv(path + "/constructor_standings.csv")
 
+constructor_results_df = pd.read_csv(path + "/constructor_results.csv")
+
 constructors_df = pd.read_csv(path + "/constructors.csv")
+
+circuit_df = pd.read_csv(path + "/circuits.csv").sort_values('name')
