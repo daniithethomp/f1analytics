@@ -12,4 +12,11 @@ def drivers_df():
     dataframe['Full Name'] = dataframe['forename'] + " " + dataframe['surname']
     return dataframe
 
-races_df =  pd.read_csv(path + "/races.csv")
+def races_df():
+    dataframe = pd.read_csv(path + "/races.csv")
+    dataframe['year'] = dataframe['year'].astype(str)
+    return dataframe
+
+constructor_standings_df = pd.read_csv(path + "/constructor_standings.csv")
+
+constructors_df = pd.read_csv(path + "/constructors.csv")
