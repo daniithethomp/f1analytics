@@ -1,2 +1,6 @@
 streamlit
 kagglehub
+pandas
+streamlit
+joblib
+scikit-learn
