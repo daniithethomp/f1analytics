@@ -13,12 +13,14 @@ def drivers_df():
 
 def races_df(ascending=True):
     dataframe =  pd.read_csv(path + "/races.csv")
+    dataframe = dataframe[dataframe['raceId'] != 355]
     dataframe['Race Identifier'] = dataframe['year'].astype('str') + " " + dataframe['name']
     dataframe = dataframe.sort_values(by='year', ascending=ascending)
     return dataframe
 
 def races_df_unsorted():
     dataframe = pd.read_csv(path + "/races.csv")
+    dataframe = dataframe[dataframe['raceId'] != 355]
     dataframe['year'] = dataframe['year'].astype(str)
     return dataframe
 
