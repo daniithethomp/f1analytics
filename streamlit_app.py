@@ -1,7 +1,6 @@
 import streamlit as st
 import pandas as pd
 import dataframes
-import jess_functions
 import analytics as a 
 from model_test import predict_winner
 
@@ -37,23 +36,34 @@ st.write(driver2 if results == 1 else driver1)
 st.write("### Feature Difference")
 st.write(pd.DataFrame([feature_diff], columns=['podiums','wins','championships','pole_positions','average_position_diff','fastest_laps']))
 st.write("## All Races")
+
+
+# Separate Race Information
+
+st.write("## Race Stats")
 sort_order = st.radio("Order:",("Ascending", "Descending"))
 ascending = True if sort_order == "Ascending" else False
 race = st.selectbox("Race", 
                 options=([race for race in (dataframes.races_df(ascending=ascending))['Race Identifier']]))
 
-st.write("### Fastest Lap Time")
+st.write("### Race Results")
 try:
-    best_lap_time = jess_functions.lap_times(race)
-    st.dataframe(best_lap_time)
+    race_results_df = a.race_results(race)
+    st.table(race_results_df)
 except Exception as e:
     st.write(str(e))
 
-# st.write("### Fastest Pit Stop (ms)")
-# st.write("This data includes drive-through penalties")
-# try:
-#     best_pit_stop = jess_functions.best_pit_stop_per_race(race)
-#     st.dataframe(best_pit_stop)
-# except Exception as e:
-#     st.write(str(e))
+st.write("#### Fastest Lap Time")
+try:
+    best_lap_time = a.lap_times(race)
+    st.table(best_lap_time)
+except Exception as e:
+    st.write(str(e))
 
+st.write("#### Fastest Pit Stop (seconds)")
+st.write("This data includes drive-through penalties")
+try:
+    best_pit_stop = a.best_pit_stop_per_race(race)
+    st.table(best_pit_stop)
+except Exception as e:
+    st.write(str(e))
