@@ -34,11 +34,37 @@ def constructor_results_over_time_per_circuit(constructor_name, circuit_name):
     # Get all race results for that constructor
     results = df.constructor_results_df[df.constructor_results_df['constructorId'] == get_constructor_id(constructor_name)]
     
-    # Join race table to query year, then filter by circuit
-    results = results.join(df.races_df(), on='raceId', lsuffix='l', rsuffix='r')
+    # Join race table so can query year, then filter by circuit
+    results = results.join(df.races_df(), on='raceId', lsuffix='', rsuffix='_race')
     results = results[results['circuitId'] == get_circuit_id(circuit_name)]
+
+    # Join circuit stats
+    results = results.join(df.circuit_df, on='circuitId', lsuffix='', rsuffix='_circuit')
 
     # Race results for that race, and that constructor
     constructor_results_per_year = results.loc[results.groupby('year')['round'].idxmax()]
     return constructor_results_per_year
 
+def convert_column_to_percent(column_name, dataframe, negate=False):
+    max_val = dataframe.loc[dataframe[column_name].idxmax()]
+    dataframe.assign(Percentage = lambda x: (x[column_name] /max_val * 100))
+    return dataframe
+
+# will get the points earned by a constructor over that year
+def constructor_results_across_circuits_over_year(constructor_name, year):
+    # Get all race results for that constructor
+    results = df.constructor_results_df[df.constructor_results_df['constructorId'] == get_constructor_id(constructor_name)]
+
+    # Join race table to query year, then filter by year
+    results = results.join(df.races_df(), on='raceId', lsuffix='', rsuffix='_race')
+
+    results = results[results['year'] == year]
+
+    # Join circuit stats
+    results = results.join(df.circuit_df, on='circuitId', lsuffix='', rsuffix='_circuit')
+
+    # Race results for that race, and that constructor
+    constructor_results_per_year = results.sort_values("round")
+    # constructor_results_per_year = convert_column_to_percent("points", constructor_results_per_year)
+    # constructor_results_per_year = convert_column_to_percent("alt", constructor_results_per_year, True)
+    return constructor_results_per_year
