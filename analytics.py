@@ -8,6 +8,7 @@ def driver_standing_over_time(driver):
     driver_specific_standings = driver_standing_frame[driver_standing_frame['driverId'] == driver_id]
     driver_specific_standings = driver_specific_standings.join(df.races_df(), on='raceId', lsuffix='l', rsuffix='r')
     driver_standing_per_year = driver_specific_standings.loc[driver_specific_standings.groupby('year')['round'].idxmax()]
+    driver_standing_per_year['year'] = driver_standing_per_year['year'].astype(int).astype(str)
     return driver_standing_per_year
 
 def constructor_standings_over_time(constructor):
