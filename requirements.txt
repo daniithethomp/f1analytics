@@ -1,2 +1,6 @@
 streamlit
 kagglehub
+pandas
+urllib
+streamlit
+joblib

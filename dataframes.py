@@ -1,6 +1,5 @@
 import pandas as pd
 import kagglehub
-import json
 from urllib.request import urlopen
 
 path = kagglehub.dataset_download("rohanrao/formula-1-world-championship-1950-2020")
