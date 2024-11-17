@@ -35,6 +35,8 @@ st.write("will win against")
 st.write(driver2 if results == 1 else driver1)
 st.write("### Feature Difference")
 st.write(pd.DataFrame([feature_diff], columns=['podiums','wins','championships','pole_positions','average_position_diff','fastest_laps']))
+st.write("### Model Accuracy")
+st.write("Our model has an accuracy of _")
 st.write("## All Races")
 
 
