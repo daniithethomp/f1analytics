@@ -29,7 +29,7 @@ st.line_chart(results_per_year, x='year', y='points')
 
 st.write("### Constructor Results Over Season")
 year = st.text_input("Year (1950-2020):", "2020")
-st.bar_chart(a.constructor_results_across_circuits_over_year(constructor, year), x='name_circuit', y=["points"])
+st.bar_chart(a.constructor_results_across_circuits_over_year(constructor, year), x='name_circuit', y="points", x_label="circuit name")
 
 st.write("## Head to Head")
 driver1 = st.selectbox("Driver 1",

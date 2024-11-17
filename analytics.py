@@ -105,7 +105,7 @@ def constructor_results_across_circuits_over_year(constructor_name, year):
     results = df.constructor_results_df[df.constructor_results_df['constructorId'] == get_constructor_id(constructor_name)]
 
     # Join race table to query year, then filter by year
-    results = results.join(df.races_df(), on='raceId', lsuffix='', rsuffix='_race')
+    results = results.join(df.races_df_unsorted(), on='raceId', lsuffix='', rsuffix='_race')
 
     results = results[results['year'] == year]
 

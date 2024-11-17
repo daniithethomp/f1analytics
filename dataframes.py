@@ -17,6 +17,11 @@ def races_df(ascending=True):
     dataframe = dataframe.sort_values(by='year', ascending=ascending)
     return dataframe
 
+def races_df_unsorted():
+    dataframe = pd.read_csv(path + "/races.csv")
+    dataframe['year'] = dataframe['year'].astype(str)
+    return dataframe
+
 pit_stop_df = pd.read_csv(path + "/pit_stops.csv")
 
 lap_times_df = pd.read_csv(path + "/lap_times.csv")
