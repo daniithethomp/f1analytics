@@ -30,9 +30,9 @@ driver1id = df.drivers_df()[df.drivers_df()['Full Name'] == driver1]['driverId']
 driver2id = df.drivers_df()[df.drivers_df()['Full Name'] == driver2]['driverId'].values[0]
 results, feature_diff = predict_winner(driver1id, driver2id)
 st.write("Our model predicts that:")
-st.write(driver1 if results == 1 else driver2)
+st.write(driver1 if results == driver1id else driver2)
 st.write("will win against")
-st.write(driver2 if results == 1 else driver1)
+st.write(driver2 if results == driver1id else driver1)
 st.write("### Feature Difference")
 st.write(pd.DataFrame([feature_diff], columns=['podiums','wins','championships','pole_positions','average_position_diff','fastest_laps']))
 st.write("### Model Accuracy")
