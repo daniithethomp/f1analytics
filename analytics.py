@@ -91,6 +91,7 @@ def constructor_results_over_time_per_circuit(constructor_name, circuit_name):
 
     # Race results for that race, and that constructor
     constructor_results_per_year = results.loc[results.groupby('year')['round'].idxmax()]
+    constructor_results_per_year['year'] = constructor_results_per_year['year'].astype(int).astype(str)
     return constructor_results_per_year
 
 def convert_column_to_percent(column_name, dataframe, negate=False):
