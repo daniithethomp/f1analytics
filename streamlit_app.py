@@ -3,6 +3,7 @@ import pandas as pd
 import dataframes
 import jess_functions
 import analytics as a 
+from model_test import predict_winner
 
 
 st.title("F1 Analytics")
@@ -22,7 +23,19 @@ st.write("### Constructor Standing Per Season")
 c_standings = a.constructor_standings_over_time(constructor)
 st.line_chart(c_standings, x='year', y='position', x_label='Year', y_label='Position')
 st.write("## Head to Head")
-
+driver1 = st.selectbox("Driver 1",
+                       options=([name for name in (dataframes.drivers_df())['Full Name']]))
+driver2 = st.selectbox("Driver 2",
+                          options=([name for name in (dataframes.drivers_df())['Full Name']]))
+driver1id = dataframes.drivers_df()[dataframes.drivers_df()['Full Name'] == driver1]['driverId'].values[0]
+driver2id = dataframes.drivers_df()[dataframes.drivers_df()['Full Name'] == driver2]['driverId'].values[0]
+results, feature_diff = predict_winner(driver1id, driver2id)
+st.write("Our model predicts that:")
+st.write(driver1 if results == 1 else driver2)
+st.write("will win against")
+st.write(driver2 if results == 1 else driver1)
+st.write("### Feature Difference")
+st.write(pd.DataFrame([feature_diff], columns=['podiums','wins','championships','pole_positions','average_position_diff','fastest_laps']))
 st.write("## All Races")
 sort_order = st.radio("Order:",("Ascending", "Descending"))
 ascending = True if sort_order == "Ascending" else False
