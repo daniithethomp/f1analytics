@@ -28,9 +28,9 @@ def driver_wins_over_time(driver):
     driver_wins_per_year = driver_specific_wins[driver_specific_wins['position'] == 1].groupby('year').size()
     return driver_wins_per_year
 
-def race_data(race, df):
+def race_data(race, dataframe):
     raceId = (df.races_df())[(df.races_df())['Race Identifier'] == race]['raceId'].iloc[0]
-    raceRow = df[df['raceId'] == raceId]
+    raceRow = dataframe[dataframe['raceId'] == raceId]
     return raceRow
 
 def best_pit_stop_per_race(race):
