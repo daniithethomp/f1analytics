@@ -1,10 +1,5 @@
 import pandas as pd
 import kagglehub
-import json
-from urllib.request import urlopen
-
-response = urlopen('https://api.openf1.org/v1/pit?')
-data = json.loads(response.read().decode('utf-8'))
 
 path = kagglehub.dataset_download("rohanrao/formula-1-world-championship-1950-2020")
 
@@ -27,6 +22,8 @@ pit_stop_df = pd.read_csv(path + "/pit_stops.csv")
 
 lap_times_df = pd.read_csv(path + "/lap_times.csv")
 
+
 constructor_standings_df = pd.read_csv(path + "/constructor_standings.csv")
 constructors_df = pd.read_csv(path + "/constructors.csv")
 
+results_df = pd.read_csv(path + "/results.csv")

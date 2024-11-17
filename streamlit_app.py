@@ -1,7 +1,7 @@
 import streamlit as st
 import pandas as pd
 import dataframes
-import jess_functions
+import analytics
 import analytics as a 
 
 
@@ -19,24 +19,33 @@ c_standings = a.constructor_standings_over_time(constructor)
 st.line_chart(c_standings, x='year', y='position', x_label='Year', y_label='Position')
 st.write("## Head to Head")
 
-st.write("## All Races")
+
+# Separate Race Information
+
+st.write("## Race Stats")
 sort_order = st.radio("Order:",("Ascending", "Descending"))
 ascending = True if sort_order == "Ascending" else False
 race = st.selectbox("Race", 
                 options=([race for race in (dataframes.races_df(ascending=ascending))['Race Identifier']]))
 
-st.write("### Fastest Lap Time")
+st.write("### Race Results")
 try:
-    best_lap_time = jess_functions.lap_times(race)
-    st.dataframe(best_lap_time)
+    race_results_df = analytics.race_results(race)
+    st.table(race_results_df)
 except Exception as e:
     st.write(str(e))
 
-# st.write("### Fastest Pit Stop (ms)")
-# st.write("This data includes drive-through penalties")
-# try:
-#     best_pit_stop = jess_functions.best_pit_stop_per_race(race)
-#     st.dataframe(best_pit_stop)
-# except Exception as e:
-#     st.write(str(e))
+st.write("#### Fastest Lap Time")
+try:
+    best_lap_time = analytics.lap_times(race)
+    st.table(best_lap_time)
+except Exception as e:
+    st.write(str(e))
 
+st.write("#### Fastest Pit Stop (seconds)")
+st.write("This data includes drive-through penalties")
+try:
+    best_pit_stop = analytics.best_pit_stop_per_race(race)
+    st.table(best_pit_stop)
+except Exception as e:
+    st.write(str(e))
