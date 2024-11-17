@@ -70,7 +70,7 @@ def create_driver_pairs(race_results, drivers):
     return pd.DataFrame(pairs, columns=['podiums','wins','championships','pole_positions','average_position_diff','fastest_laps'] + ['winner'])
 
 time_start = pd.Timestamp.now()
-race_results = df.results_df[df.results_df['raceId'] < 1000][['raceId','driverId','positionOrder']]
+race_results = df.results_df[['raceId','driverId','positionOrder']]
 print(race_results)
 pairs = create_driver_pairs(race_results, drivers)
 time_fin = pd.Timestamp.now()

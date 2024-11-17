@@ -6,8 +6,33 @@ A Streamlit application for analysing Formula 1 race data.
 
 - **Driver Stats**: View driver standings and wins per season.
 - **Constructor Stats**: View constructor standings per season + other features Andrew has added.
-- **Head to Head**: Put two drivers against each other to see who comes out ahead.
+- **Head to Head**: Put two drivers against each other and let our model predict who would win
 - **Race Stats**: View results, fastest lap times, and fastest pit stops for selected races.
+
+### The Model
+#### Feature Selection
+The features were selected manually using intuition.
+
+The features we selected are:
+- number of races won
+- number of podiums
+- number of championships won
+- average position gain in races
+- number of fastest laps
+#### Model Training
+For each race, we created pairs of each driver in the race. We then calculated the difference between each of the driver's selected features. We labelled the data with which driver finished ahead of the other in the race.
+
+This data was then split into two, with half being the training data and half being the test data.
+A Logistic Regression model was then trained and packaged.
+#### Model Testing
+The model's statistics:
+
+- Accuracy: 0.648
+- Precision: 0.648
+- Recall: 0.720
+- F1 Score: 0.682
+#### Using the model
+The selected features of each driver was written to `driver_power_rankings.csv` and is used to quickly read the features for the selected drivers. The feature difference is calculated and fed into the model which then returns a prediction of who would win.
 
 ### How to run it on your own machine
 
