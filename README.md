@@ -5,8 +5,8 @@ A Streamlit application for analysing Formula 1 race data.
 ## Features
 
 - **Driver Stats**: View driver standings and wins per season.
-- **Constructor Stats**: View constructor standings per season + other features Andrew has added.
-- **Head to Head**: Put two drivers against each other and let our model predict who would win
+- **Constructor Stats**: View constructor standings per season, points earned over season by race, and results at a given circuit over time.
+- **Head to Head**: Put two drivers against each other and let our model predict who would win.
 - **Race Stats**: View results, fastest lap times, and fastest pit stops for selected races.
 
 ### The Model
