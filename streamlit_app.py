@@ -27,9 +27,9 @@ circuit = st.selectbox("Circuit", options=([name for name in df.circuit_df['name
 results_per_year = a.constructor_results_over_time_per_circuit(constructor, circuit)
 st.line_chart(results_per_year, x='year', y='points')
 
-st.write("### Constructor Results Over Season")
-year = st.text_input("Year (1950-2020):", "2020")
-st.bar_chart(a.constructor_results_across_circuits_over_year(constructor, year), x='name_circuit', y="points")
+# st.write("### Constructor Results Over Season")
+# year = st.text_input("Year (1950-2020):", "2020")
+# st.bar_chart(a.constructor_results_across_circuits_over_year(constructor, year), x='name_circuit', y=["points"])
 
 st.write("## Head to Head")
 driver1 = st.selectbox("Driver 1",
