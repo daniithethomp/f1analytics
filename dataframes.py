@@ -26,4 +26,3 @@ lap_times_df = pd.read_csv(path + "/lap_times.csv")
 constructor_standings_df = pd.read_csv(path + "/constructor_standings.csv")
 constructors_df = pd.read_csv(path + "/constructors.csv")
 
-results_df = pd.read_csv(path + "/results.csv")
