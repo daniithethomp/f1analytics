@@ -1,7 +1,6 @@
 import streamlit as st
 import pandas as pd
 import dataframes
-import analytics
 import analytics as a 
 
 
@@ -34,14 +33,14 @@ race = st.selectbox("Race",
 
 st.write("### Race Results")
 try:
-    race_results_df = analytics.race_results(race)
+    race_results_df = a.race_results(race)
     st.table(race_results_df)
 except Exception as e:
     st.write(str(e))
 
 st.write("#### Fastest Lap Time")
 try:
-    best_lap_time = analytics.lap_times(race)
+    best_lap_time = a.lap_times(race)
     st.table(best_lap_time)
 except Exception as e:
     st.write(str(e))
@@ -49,7 +48,7 @@ except Exception as e:
 st.write("#### Fastest Pit Stop (seconds)")
 st.write("This data includes drive-through penalties")
 try:
-    best_pit_stop = analytics.best_pit_stop_per_race(race)
+    best_pit_stop = a.best_pit_stop_per_race(race)
     st.table(best_pit_stop)
 except Exception as e:
     st.write(str(e))
