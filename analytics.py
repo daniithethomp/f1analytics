@@ -50,6 +50,7 @@ def lap_times(race):
         raise Exception("No fastest lap times recorded")
     else:
         best_lap_time = raceRow.loc[raceRow['fastestLapTime'].idxmin()]
+        best_lap_time['fastestLapTime'] = best_lap_time['fastestLapTime'].replace("\\N", "No lap time recorded")
         driver_info = df.drivers_df()[df.drivers_df()['driverId'] == best_lap_time['driverId']]
         best_lap_time = pd.merge(best_lap_time.to_frame().T, driver_info, on='driverId')
         best_lap_time = best_lap_time.rename(columns={'fastestLapTime': 'Lap Time', 'Full Name': 'Driver'})        
